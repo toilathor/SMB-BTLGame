@@ -24,6 +24,9 @@ public class Player : MonoBehaviour
 
     public SoundManager sound;
 
+    //phu
+    int hP = 2;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -65,6 +68,10 @@ public class Player : MonoBehaviour
                       = new Vector2(gameObject.GetComponent<Rigidbody2D>().velocity.x, jumb);
                 }
             }
+        }
+        if (hP <= 0)
+        {
+            Debug.Log("Chết Rôi");
         }
     }
 
@@ -151,4 +158,14 @@ public class Player : MonoBehaviour
         }
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
+
+    //phu
+    //void OnCollisionEnter(Collision2D collision2D)
+    //{
+    //    if (collision2D.collider.CompareTag("Monster"))
+    //    {
+    //        --hP;
+    //    }
+    //}
+
 }

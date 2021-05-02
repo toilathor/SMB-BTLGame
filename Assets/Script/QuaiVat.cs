@@ -8,6 +8,7 @@ public class QuaiVat : MonoBehaviour
     private float locDefault;
     private bool nguoc = true;
 
+
     // Start is called before the first frame update
     void Start()
     {

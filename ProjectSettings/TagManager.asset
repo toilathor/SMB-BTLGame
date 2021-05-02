@@ -16,6 +16,7 @@ TagManager:
   - downOngKhoi
   - upOngKhoi
   - upOngKhoiEnd
+  - Kill
   layers:
   - Default
   - TransparentFX
