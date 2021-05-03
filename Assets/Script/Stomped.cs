@@ -7,6 +7,7 @@ public class Stomped : MonoBehaviour
     public float force;
     bool stomed = false;
 
+
     // Start is called before the first frame update
     void Start()
     {
@@ -28,6 +29,7 @@ public class Stomped : MonoBehaviour
             stomed = true;
             BoxCollider2D boxCollider2D = transform.parent.gameObject.GetComponent<BoxCollider2D>();
             boxCollider2D.enabled = false;
+
         }
 
     }
@@ -38,4 +40,5 @@ public class Stomped : MonoBehaviour
             Destroy(transform.parent.gameObject);
         }
     }
+    
 }
