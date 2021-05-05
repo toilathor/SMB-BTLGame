@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 public class Player : MonoBehaviour
 {
     private float speed = 10f;
-    private float jumb = 20f;
+    public float jumb = 20f;
     private int countScore = 0;
     private Text txtScore;
     private Text txtHightScore;
@@ -22,7 +22,9 @@ public class Player : MonoBehaviour
     public int ourHealth = 5;
     public int maxHealth = 5;
 
-    public SoundManager sound;
+    private SoundManager sound;
+    public GameObject BodyMario;
+
 
     //phu
     int hP = 2;
@@ -33,8 +35,8 @@ public class Player : MonoBehaviour
         txtScore = GameObject.Find("textScore").GetComponent<Text>();
         txtHightScore = GameObject.Find("txtHightScore").GetComponent<Text>();
         txtHeath = GameObject.Find("txtHeath").GetComponent<Text>();
-        anim = GetComponent<Animator>();
-        rigi = GetComponent<Rigidbody2D>();
+        anim = BodyMario.GetComponent<Animator>();
+        rigi = BodyMario.GetComponent<Rigidbody2D>();
 
         //chỗ này là để test nếu xuất bản thì phải xóa
         PlayerPrefs.SetInt("hightscore", 0);
@@ -51,7 +53,7 @@ public class Player : MonoBehaviour
 
         if (Input.GetKey(KeyCode.Space))
         {
-            if (grounded)
+            if (grounded && !doubleJumb)
             {
                 grounded = false;
                 doubleJumb = true;
@@ -118,7 +120,7 @@ public class Player : MonoBehaviour
 
         }
         
-        if (collision.gameObject.tag == "Monster")
+        if (collision.gameObject.tag == "BodyGomba")
         {
             ourHealth--;
 
@@ -148,6 +150,11 @@ public class Player : MonoBehaviour
         {
             Death();
         }
+        if (collision.gameObject.tag == "HeadGomba")
+        {
+            gameObject.GetComponent<Rigidbody2D>().velocity
+                      = new Vector2(gameObject.GetComponent<Rigidbody2D>().velocity.x, jumb);
+        }
     }
 
     public void Death()
@@ -158,14 +165,4 @@ public class Player : MonoBehaviour
         }
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
-
-    //phu
-    //void OnCollisionEnter(Collision2D collision2D)
-    //{
-    //    if (collision2D.collider.CompareTag("Monster"))
-    //    {
-    //        --hP;
-    //    }
-    //}
-
 }

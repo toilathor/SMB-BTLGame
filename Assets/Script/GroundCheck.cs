@@ -5,11 +5,12 @@ using UnityEngine.SceneManagement;
 
 public class GroundCheck : MonoBehaviour
 {
-    public Player player;
+    private Player player;
+    public GameObject mario;
     // Start is called before the first frame update
     void Start()
     {
-        player = gameObject.GetComponentInParent<Player>();
+        player = mario.GetComponentInParent<Player>();
     }
 
     // Update is called once per frame

@@ -58,13 +58,13 @@
   <ItemGroup>
     <Compile Include="Assets\Script\SoundManager.cs" />
     <Compile Include="Assets\Script\Player.cs" />
-    <Compile Include="Assets\Script\QuaiVat.cs" />
     <Compile Include="Assets\Script\PauseUI.cs" />
     <Compile Include="Assets\Script\MainMenu.cs" />
-    <Compile Include="Assets\Script\Stomped.cs" />
     <Compile Include="Assets\Script\GroundCheck.cs" />
     <Compile Include="Assets\Script\Camera.cs" />
     <Compile Include="Assets\Script\MovingPlat.cs" />
+    <Compile Include="Assets\Script\GombaMoving.cs" />
+    <Compile Include="Assets\Script\HeadGomba.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
