@@ -17,6 +17,9 @@ TagManager:
   - upOngKhoi
   - upOngKhoiEnd
   - Kill
+  - HeadGomba
+  - BodyGomba
+  - BottomMario
   layers:
   - Default
   - TransparentFX
