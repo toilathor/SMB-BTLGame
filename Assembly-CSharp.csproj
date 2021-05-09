@@ -60,11 +60,13 @@
     <Compile Include="Assets\Script\Player.cs" />
     <Compile Include="Assets\Script\PauseUI.cs" />
     <Compile Include="Assets\Script\MainMenu.cs" />
+    <Compile Include="Assets\Script\HeadGomba.cs" />
     <Compile Include="Assets\Script\GroundCheck.cs" />
     <Compile Include="Assets\Script\Camera.cs" />
     <Compile Include="Assets\Script\MovingPlat.cs" />
+    <Compile Include="Assets\Script\KhoiChuaVp.cs" />
     <Compile Include="Assets\Script\GombaMoving.cs" />
-    <Compile Include="Assets\Script\HeadGomba.cs" />
+    <Compile Include="Assets\Script\CDNgang.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

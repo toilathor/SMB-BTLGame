@@ -14,7 +14,6 @@ public class Player : MonoBehaviour
     private int hightcore;
     private Text txtHeath;
     private Animator anim;
-    private Rigidbody2D rigi;
 
     public bool grounded = true;
     public bool doubleJumb = false;
@@ -36,7 +35,6 @@ public class Player : MonoBehaviour
         txtHightScore = GameObject.Find("txtHightScore").GetComponent<Text>();
         txtHeath = GameObject.Find("txtHeath").GetComponent<Text>();
         anim = BodyMario.GetComponent<Animator>();
-        rigi = BodyMario.GetComponent<Rigidbody2D>();
 
         //chỗ này là để test nếu xuất bản thì phải xóa
         PlayerPrefs.SetInt("hightscore", 0);
@@ -53,7 +51,7 @@ public class Player : MonoBehaviour
 
         if (Input.GetKey(KeyCode.Space))
         {
-            if (grounded && !doubleJumb)
+            if (grounded)
             {
                 grounded = false;
                 doubleJumb = true;
@@ -64,7 +62,6 @@ public class Player : MonoBehaviour
             {
                 if (doubleJumb)
                 {
-                    sound.Playsound("jumb");
                     doubleJumb = false;
                     gameObject.GetComponent<Rigidbody2D>().velocity
                       = new Vector2(gameObject.GetComponent<Rigidbody2D>().velocity.x, jumb);
@@ -139,6 +136,10 @@ public class Player : MonoBehaviour
         if (collision.gameObject.tag == "finalMapThor")
         {
             SceneManager.LoadScene("MapSkyHuy");
+        }
+        if (collision.gameObject.tag == "princess")
+        {
+            SceneManager.LoadScene("EndStory");
         }
         if (collision.gameObject.tag == "finalMapHuy")
         {

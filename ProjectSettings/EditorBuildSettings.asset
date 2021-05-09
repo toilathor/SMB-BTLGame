@@ -26,4 +26,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/PhuMap.unity
     guid: 0bce24d55eb35df47bcab2028888045a
+  - enabled: 1
+    path: Assets/Scenes/EndStory.unity
+    guid: 28f9d0c2e03dc1546814e6c00567d20d
   m_configObjects: {}

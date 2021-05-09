@@ -20,6 +20,12 @@ TagManager:
   - HeadGomba
   - BodyGomba
   - BottomMario
+  - leftWall
+  - rightWall
+  - keThu
+  - Mario
+  - MarioPlayer
+  - princess
   layers:
   - Default
   - TransparentFX
