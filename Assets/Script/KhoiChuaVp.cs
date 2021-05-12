@@ -4,9 +4,6 @@ using UnityEngine;
 
 public class KhoiChuaVp : MonoBehaviour
 {
-    private float DoNayCuaKhoi = 0.5f;
-    private float TocDoNay = 4f;
-    private bool DuocNay = true;
     private Vector3 ViTriLucDau;
     public GameObject khoiRong;
     public GameObject dongXu;
@@ -44,15 +41,5 @@ public class KhoiChuaVp : MonoBehaviour
         }
        
     }
-
-    void HienThiXu()
-    {
-        
-    }
-
-    
-
-    
-    
 }
  
