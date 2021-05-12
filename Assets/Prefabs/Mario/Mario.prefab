@@ -52,7 +52,6 @@ MonoBehaviour:
   doubleJumb: 0
   ourHealth: 5
   maxHealth: 5
-  sound: {fileID: 0}
   BodyMario: {fileID: 801258610300978462}
 --- !u!50 &801258609802224715
 Rigidbody2D:
@@ -194,6 +193,16 @@ PrefabInstance:
       propertyPath: mario
       value: 
       objectReference: {fileID: 801258609802224713}
+    - target: {fileID: 7007734379647012380, guid: 81a92161bead52b4ea92749741e76aab,
+        type: 3}
+      propertyPath: m_Size.x
+      value: 0.90914917
+      objectReference: {fileID: 0}
+    - target: {fileID: 7007734379647012380, guid: 81a92161bead52b4ea92749741e76aab,
+        type: 3}
+      propertyPath: m_Offset.x
+      value: -0.03543091
+      objectReference: {fileID: 0}
     - target: {fileID: 7007734379647012382, guid: 81a92161bead52b4ea92749741e76aab,
         type: 3}
       propertyPath: m_Name

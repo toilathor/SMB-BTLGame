@@ -7,40 +7,42 @@ using UnityEngine.SceneManagement;
 public class Player : MonoBehaviour
 {
     private float speed = 10f;
-    public float jumb = 20f;
+    public float jumb = 12f;
     private int countScore = 0;
     private Text txtScore;
     private Text txtHightScore;
-    private int hightcore;
-    private Text txtHeath;
+    private Text txtHeart;
     private Animator anim;
 
     public bool grounded = true;
     public bool doubleJumb = false;
 
-    public int ourHealth = 5;
+    private int ourHeart;
     public int maxHealth = 5;
 
     private SoundManager sound;
     public GameObject BodyMario;
 
-
-    //phu
-    int hP = 2;
-
     // Start is called before the first frame update
     void Start()
     {
+        //lấy ra Component
         txtScore = GameObject.Find("textScore").GetComponent<Text>();
         txtHightScore = GameObject.Find("txtHightScore").GetComponent<Text>();
-        txtHeath = GameObject.Find("txtHeath").GetComponent<Text>();
+        txtHeart = GameObject.Find("txtHeath").GetComponent<Text>();
         anim = BodyMario.GetComponent<Animator>();
 
         //chỗ này là để test nếu xuất bản thì phải xóa
         PlayerPrefs.SetInt("hightscore", 0);
-
         txtHightScore.text = ("Hight Score: " + PlayerPrefs.GetInt("hightscore"));
-        hightcore = PlayerPrefs.GetInt("hightscore", 0);
+
+        // xét điểm hiện tại, nếu chưa có biến này thì nó sẽ lấy mặc định là 0
+        countScore = PlayerPrefs.GetInt("currentScore", 0);
+        txtScore.text = "Score: " + PlayerPrefs.GetInt("currentScore", 0);
+
+        // xét mạng hiện tại, nếu chưa có biến này thì nó sẽ lấy mặc định là 5
+        ourHeart = PlayerPrefs.GetInt("currentHeart", 5);
+        txtHeart.text = "" + PlayerPrefs.GetInt("currentHeart", 5);
 
         sound = GameObject.FindGameObjectWithTag("Sound").GetComponent<SoundManager>();
     }
@@ -49,7 +51,7 @@ public class Player : MonoBehaviour
     {
         anim.SetBool("Grounded", grounded);
 
-        if (Input.GetKey(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space))
         {
             if (grounded)
             {
@@ -64,13 +66,9 @@ public class Player : MonoBehaviour
                 {
                     doubleJumb = false;
                     gameObject.GetComponent<Rigidbody2D>().velocity
-                      = new Vector2(gameObject.GetComponent<Rigidbody2D>().velocity.x, jumb);
+                      = new Vector2(gameObject.GetComponent<Rigidbody2D>().velocity.x, jumb * 0.5f);
                 }
             }
-        }
-        if (hP <= 0)
-        {
-            Debug.Log("Chết Rôi");
         }
     }
 
@@ -99,6 +97,11 @@ public class Player : MonoBehaviour
         {
             anim.SetBool("Walk", false);
         }
+
+        if (ourHeart <= 0)
+        {
+            Death();
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -106,51 +109,62 @@ public class Player : MonoBehaviour
         if (collision.gameObject.tag == "Coin")
         {
             sound.Playsound("Coin");
-
+            upScore();
             Destroy(collision.gameObject);
-            txtScore.text = "Score: " + ++countScore;
-            if (PlayerPrefs.GetInt("hightscore") < countScore)
-            {
-                PlayerPrefs.SetInt("hightscore", countScore);
-                txtHightScore.text = ("Hight Score: " + PlayerPrefs.GetInt("hightscore"));
-            }
-
         }
-        
+
         if (collision.gameObject.tag == "BodyGomba")
         {
-            ourHealth--;
-
+            txtHeart.text = "" + --ourHeart;
         }
-        txtHeath.text = "<3:  " + ourHealth;
 
-        
-        if (ourHealth <= 0)
+    }
+
+
+    /*
+     *  Hàm này sẽ tăng điểm lên và nếu điểm 
+     *  cao hơn điểm cao thì set vào điểm cao
+     */
+    private void upScore()
+    {
+        txtScore.text = "Score: " + ++countScore;
+        PlayerPrefs.SetInt("currentScore", countScore);
+        if (PlayerPrefs.GetInt("hightscore") < countScore)
         {
-            Death();
+            PlayerPrefs.SetInt("hightscore", countScore);
+            txtHightScore.text = ("Hight Score: " + PlayerPrefs.GetInt("hightscore"));
         }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        // chạm tột của Thọ thì chuyển map
         if (collision.gameObject.tag == "finalMapThor")
         {
             SceneManager.LoadScene("MapSkyHuy");
         }
+
+        // chạm princess thì EndGame
         if (collision.gameObject.tag == "princess")
         {
             SceneManager.LoadScene("EndStory");
         }
+
+        // chạm thì end map Huy
         if (collision.gameObject.tag == "finalMapHuy")
         {
             SceneManager.LoadScene("Map2_phu");
         }
-        txtHeath.text = "<3:  " + ourHealth;
 
+        //chạm bottom thì replace
         if (collision.gameObject.tag == "Bottom")
         {
-            Death();
+            --ourHeart;
+            PlayerPrefs.SetInt("currentHeart", ourHeart);
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
+
+        //nhảy lên đầu con nấm thì nhảy lên cái nữa
         if (collision.gameObject.tag == "HeadGomba")
         {
             gameObject.GetComponent<Rigidbody2D>().velocity
@@ -158,12 +172,17 @@ public class Player : MonoBehaviour
         }
     }
 
+    //chết thì kiểm  tra điểm cao, load lại game
     public void Death()
     {
         if (PlayerPrefs.GetInt("hightscore") < countScore)
         {
             PlayerPrefs.SetInt("hightscore", countScore);
         }
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+
+        PlayerPrefs.SetInt("currentScore", 0);
+        PlayerPrefs.SetInt("currentHeart", 5);
+
+        SceneManager.LoadScene("PlayGame");
     }
 }
