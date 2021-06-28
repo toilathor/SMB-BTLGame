@@ -28,6 +28,7 @@ public class CDNgang : MonoBehaviour
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
+
     {
         if(collision.contacts[0].normal.x > 0)
         {

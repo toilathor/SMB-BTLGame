@@ -113,7 +113,7 @@ public class Player : MonoBehaviour
             Destroy(collision.gameObject);
         }
 
-        if (collision.gameObject.tag == "BodyGomba")
+        if (collision.gameObject.tag == "BodyGomba" || collision.gameObject.tag == "BodyTurtle")
         {
             txtHeart.text = "" + --ourHeart;
         }
@@ -165,7 +165,7 @@ public class Player : MonoBehaviour
         }
 
         //nhảy lên đầu con nấm thì nhảy lên cái nữa
-        if (collision.gameObject.tag == "HeadGomba")
+        if (collision.gameObject.tag == "HeadGomba" || collision.gameObject.tag == "HeaderTurtle")
         {
             gameObject.GetComponent<Rigidbody2D>().velocity
                       = new Vector2(gameObject.GetComponent<Rigidbody2D>().velocity.x, jumb);

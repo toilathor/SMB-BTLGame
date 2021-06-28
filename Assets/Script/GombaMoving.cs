@@ -40,10 +40,15 @@ public class GombaMoving : MonoBehaviour
         if (gameObject.transform.position.x < locDefault - maxMove / 2)
         {
             nguoc = false;
+            if(gameObject.tag == "turtle")
+            {
+                gameObject.transform.localScale = new Vector2(-1f * gameObject.transform.localScale.x, gameObject.transform.localScale.y);
+            }
         }
         else if (gameObject.transform.position.x > locDefault + maxMove / 2)
         {
             nguoc = true;
+            gameObject.transform.localScale = new Vector2(-1f * gameObject.transform.localScale.x, gameObject.transform.localScale.y);
         }
 
     }

@@ -36,7 +36,10 @@ public class KhoiChuaVp : MonoBehaviour
             GameObject KhoiRong = (GameObject)Instantiate(khoiRong);
             KhoiRong.transform.position = ViTriLucDau;
             GameObject DongXu = (GameObject)Instantiate(dongXu);
-            DongXu.transform.position = ViTriLucDau;    
+            DongXu.transform.position = ViTriLucDau;
+           
+
+
 
         }
        
