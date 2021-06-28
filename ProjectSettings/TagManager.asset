@@ -26,6 +26,9 @@ TagManager:
   - Mario
   - MarioPlayer
   - princess
+  - turtle
+  - BodyTurtle
+  - HeaderTurtle
   layers:
   - Default
   - TransparentFX
