@@ -31,18 +31,13 @@ public class KhoiChuaVp : MonoBehaviour
         //neu nhu doi tuong mario va cham phia duoi
         if (collision.collider.tag == "MarioPlayer" && collision.contacts[0].normal.y>0)
         {
-            
             ViTriLucDau = transform.position;
             GameObject KhoiRong = (GameObject)Instantiate(khoiRong);
             KhoiRong.transform.position = ViTriLucDau;
             GameObject DongXu = (GameObject)Instantiate(dongXu);
             DongXu.transform.position = ViTriLucDau;
-           
-
-
-
+            Destroy(collision.gameObject);
         }
-       
     }
 }
  
