@@ -135,9 +135,26 @@ public class Player : MonoBehaviour
             txtHightScore.text = ("Hight Score: " + PlayerPrefs.GetInt("hightscore"));
         }
     }
+    
+    // check khi player nhảy thoát khỏi bệ đá
+    private void OnTriggerExit2D(Collider2D collision)
+        {
+            if (collision.gameObject.CompareTag("MovingPlat"))
+            {
+                gameObject.transform.parent = null;
+            }
+        }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        
+        // check khi player dung len thi di chuyển theo
+        if (collision.gameObject.tag == "MovingPlat" && grounded)
+        {
+            grounded = false;
+            gameObject.transform.parent = collision.gameObject.transform;
+        }
+        
         // chạm tột của Thọ thì chuyển map
         if (collision.gameObject.tag == "finalMapThor")
         {
@@ -169,6 +186,13 @@ public class Player : MonoBehaviour
         {
             gameObject.GetComponent<Rigidbody2D>().velocity
                       = new Vector2(gameObject.GetComponent<Rigidbody2D>().velocity.x, jumb);
+        }
+
+        //Cộng mạng
+        if(collision.gameObject.tag == "heart")
+        {
+            txtHeart.text = "" + ++ourHeart;
+            Destroy(collision.gameObject);
         }
     }
 

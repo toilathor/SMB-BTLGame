@@ -50,6 +50,5 @@ public class GombaMoving : MonoBehaviour
             nguoc = true;
             gameObject.transform.localScale = new Vector2(-1f * gameObject.transform.localScale.x, gameObject.transform.localScale.y);
         }
-
     }
 }
